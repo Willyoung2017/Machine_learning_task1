@@ -5,7 +5,8 @@ import jieba
 import pickle
 
 cnt = 0
-off_all = open("E:\\Machine learning\\Task1\\source\\test_cut_texts.pkl", 'wb')
+#off_all = open("E:\\Machine learning\\Task1\\source\\test_cut_texts.pkl", 'wb')
+off_all = open("E:\\Machine learning\\Task1\\source\\test_cut_titles.pkl", 'wb') 
 with open("E:\\Machine learning\\Task1\\test_data\\test.json", 'r') as load_f:
     for line in load_f:
         cnt = cnt + 1
@@ -15,9 +16,10 @@ with open("E:\\Machine learning\\Task1\\test_data\\test.json", 'r') as load_f:
         train_title = load_dict['title']
         train_content = load_dict['content']
         # print(train_content)
-        soup = BeautifulSoup(train_content, 'lxml')
-        para = soup.get_text()
-        seg_list = list(jieba.cut(para))
+        #soup = BeautifulSoup(train_content, 'lxml')
+        #para = soup.get_text()
+        #seg_list = list(jieba.cut(para))
+        seg_list = list(jieba.cut(train_title))
         pickle.dump(seg_list, off_all)
         if(cnt % 1000 == 0):
             print("%dok!\n" % cnt)

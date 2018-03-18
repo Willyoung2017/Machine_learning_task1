@@ -13,18 +13,18 @@ def read_data(path):
     return line
 
 
-ifile = open("E:\\Machine learning\\Task1\\source\\test_cut_texts.pkl", 'rb')
-ofile = open("E:\\Machine learning\\Task1\\source\\test_processed_texts.pkl", 'wb')
+ifile = open("E:\\Machine learning\\Task1\\source\\cut_texts.pkl", 'rb')
+ofile = open("E:\\Machine learning\\Task1\\source\\processed_texts.pkl", 'wb')
 stop_word_list = read_data(
     "E:\\Machine learning\\Task1\\source\\stop_word.txt")
 stop_word_list.append('\n')
 #processed_list = list(range(num_of_lines))
-for i in range(test_num_of_lines):
+for i in range(num_of_lines):
     _line = pickle.load(ifile)
     line = list(set(_line))
     #line.sort(key=_line.index)
-    for j in stop_word_list:
-        if j in line:
+    for j in line:
+        if j in stop_word_list:
             line.remove(j)
     Line = line.copy()
     for word in Line:

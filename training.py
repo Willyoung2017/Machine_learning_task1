@@ -28,7 +28,7 @@ def svm_classifier(train_x, train_y):
 # Logistic Regression Classifier
 def logistic_regression_classifier(train_x, train_y):
     from sklearn.linear_model import LogisticRegression
-    model = LogisticRegression(penalty='l2')
+    model = LogisticRegression(penalty='l1')
     model.fit(train_x, train_y)
     return model
 # load data
@@ -40,8 +40,8 @@ print('loading finished.\n')
 
 # train & predict data
 print('training & predicting data...\n')
-#model = logistic_regression_classifier(x_train, y_train)
-model = svm_classifier(x_train, y_train)
+model = logistic_regression_classifier(x_train, y_train)
+#model = svm_classifier(x_train, y_train)
 predict = model.predict_proba(x_test)
 predict = predict[:, 1]
 score = model.score(x_train, y_train)
