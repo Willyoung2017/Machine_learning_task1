@@ -38,16 +38,13 @@ ifile = open(processed_text_path, 'rb')
 ifile_title = open(processed_title_path, 'rb')
 test_ifile = open(test_processed_text_path, 'rb')
 test_ifile_title = open(test_processed_title_path, 'rb')
-
 processed_text = list(range(num_of_lines))
 test_processed_text = list(range(test_num_of_lines))
-
 for i in range(num_of_lines):
     line = pickle.load(ifile)
     line = " ".join(line)
     processed_text[i] = line
 ifile.close()
-
 for i in range(test_num_of_lines):
     line = pickle.load(test_ifile)
     line = " ".join(line)
@@ -68,12 +65,12 @@ print('loading y succeed.\n')
 
 # vectorizing
 print('vectorizing data...\n')
-maxfeature = 100000
+maxfeature = 1000000
 count_vec = TfidfVectorizer(binary = False, decode_error = 'ignore', max_features = maxfeature)
 x_train_content = count_vec.fit_transform(train_samplex)
 x_test_content = count_vec.transform(test_samplex)
-x_train_title = count_vec.fit_transform(train_samplex_title)
-x_test_title = count_vec.transform(test_samplex_title)
+x_train_title = 0.8 * count_vec.fit_transform(train_samplex_title)
+x_test_title = 0.8 * count_vec.transform(test_samplex_title)
 x_train = hstack((x_train_content, x_train_title))
 x_test = hstack((x_test_content, x_test_title))
 print('vectorizing finished.\n')
